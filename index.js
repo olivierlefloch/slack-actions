@@ -82,7 +82,7 @@ const react = async () => {
   const message = conversations.messages.find((m)=> m.text.includes(stringMatcher))
   
   if (message !== undefined){
-    await client.reactions.add({ token: botToken, channel: channelId, name: messages })
+    await client.reactions.add({ token: botToken, channel: channelId, name: messages, timestamp: message.ts })
   } else {
     core.setFailed('Message could not be found');
   }
