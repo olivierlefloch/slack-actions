@@ -74,8 +74,7 @@ const react = async () => {
 
   core.info("Reacting on channel: " + channelId)
 
-  // eslint-disable-next-line no-eval
-  const stringMatcher = eval(core.getInput('string-matcher'));
+  const stringMatcher = core.getInput('string-matcher');
   // eslint-disable-next-line no-eval
   const messages = core.getInput('message');
 
@@ -83,7 +82,9 @@ const react = async () => {
   core.info("Reacting with: " + messages)
 
   const client = new WebClient(botToken);
-  const conversations = await client.conversations.history({ token: botToken, channel: channelId })
+  const conversations = await client.conversations.history({
+    token: botToken, channel: channelId
+  })
   const message = conversations.messages.find((m)=> m.text.includes(stringMatcher))
 
 
