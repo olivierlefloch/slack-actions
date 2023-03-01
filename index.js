@@ -69,36 +69,36 @@ const reply = async () => {
 const react = async () => {
   // eslint-disable-next-line no-unused-vars
   const {payload} = github.context
-  const channelId = core.getInput('channel-id');
   const botToken = core.getInput('slack-bot-token');
 
-  core.info("Reacting on channel: " + channelId)
+  core.info("Reacting on all channels")
 
   const stringMatcher = core.getInput('string-matcher');
-  // eslint-disable-next-line no-eval
   const messages = core.getInput('message');
 
   core.info("Reacting to: " + stringMatcher)
   core.info("Reacting with: " + messages)
 
   const client = new WebClient(botToken);
-  const conversations = await client.conversations.history({
-    token: botToken, channel: channelId
+  const conversations = await client.search.messages({
+    token: botToken, query: stringMatcher
   })
-  const message = conversations.messages.find((m)=> m.text.includes(stringMatcher))
 
+  if (conversations.messages.total === 0) {
+    core.info("No messages found")
+    return
+  }
 
-  if (message !== undefined){
-    core.info("Found message: " + message.text)
+  // Iterate through the matching conversations, react to each one
+  for (const conversation of conversations.messages.matches) {
+    core.info("Found message: " + conversation.text)
 
     await client.reactions.add({
       token: botToken,
-      channel: channelId,
+      channel: conversation.channel.id,
       name: messages,  // The reacji
       timestamp: message.ts  // The timestamp is the message's unique identifier
     })
-  } else {
-    core.info('Message could not be found');
   }
 }
 

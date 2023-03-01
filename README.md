@@ -112,9 +112,14 @@ branch. Pull requests are warmly welcome.
 
 ### Building / Deploying / Publishing
 
-To publish a new version, we will have to build the project locally with `npm run build` and commit the `dist/` folder to [slack-actions](https://github.com/jermainezhimin/slack-actions).
+To publish a new version:
 
-we will next have to tag the commit by running `git tag -m "<tag message>" <tag name>` (_prefix tags with v and follow [semantic versioning](https://semver.org)_) and `git push --tags` to push the tag to the remote origin.
+* Install webpack (`brew install webpack` on Mac)
+* Install any missing dependencies (`npm install`)
+* Build the project locally (`npm run build`)
+* Commit the `dist/` folder
+
+We will next have to tag the commit by running `git tag -m "<tag message>" <tag name>` (_prefix tags with v and follow [semantic versioning](https://semver.org)_) and `git push --tags` to push the tag to the remote origin.
 
 If all tests pass, we will then manually [create a release](https://docs.github.com/en/enterprise/2.13/user/articles/creating-releases). Please ensure the changelog and release title is approprately filled.
 

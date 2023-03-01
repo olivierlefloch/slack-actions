@@ -5,8 +5,8 @@ inputs:
     description: 'API token to post messages to slack'
     required: true
   channel-id:
-    description: 'Channel that manages PR notifications'
-    required: true
+    description: 'Channel that manages PR notifications, unnecessary for reactions'
+    required: false
   action:
     description: 'Slack action to take'
     required: true
