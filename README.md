@@ -100,9 +100,10 @@ Arguments
 ```
 1. action: react
 2. message: <emoji name>
-2. string-matcher: <string to match against using `includes`>
-3. slack-bot-token: <Bot token to post as>
-3. channel-id: Channel to post to
+3. string-matcher: <string to match against using `includes`>
+4. slack-bot-token: <Bot token to post as>
+5. slack-search-token: <User token with search:read scope to search for matching messages> (optional)
+6. channel-id: Channel to post to
 ```
 
 ## Contributing

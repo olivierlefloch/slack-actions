@@ -67,9 +67,14 @@ const reply = async () => {
 
 
 const react = async () => {
-  // eslint-disable-next-line no-unused-vars
-  const {payload} = github.context
   const botToken = core.getInput('slack-bot-token');
+  const searchToken = core.getInput('slack-search-token');
+
+  if (searchToken === '') {
+    // FIXME: If no search token is provided, we should search the channel history
+    core.error("No search token provided, not implemented")
+    return
+  }
 
   core.info("Reacting on all channels")
 
@@ -79,9 +84,8 @@ const react = async () => {
   core.info("Reacting to: " + stringMatcher)
   core.info("Reacting with: " + messages)
 
-  const client = new WebClient(botToken);
-  const conversations = await client.search.messages({
-    token: botToken, query: stringMatcher
+  const conversations = await (new WebClient(searchToken)).search.messages({
+    token: searchToken, query: stringMatcher
   })
 
   if (conversations.messages.total === 0) {
@@ -89,9 +93,11 @@ const react = async () => {
     return
   }
 
+  const client = new WebClient(botToken);
+
   // Iterate through the matching conversations, react to each one
   for (const conversation of conversations.messages.matches) {
-    core.info("Found message: " + conversation.text)
+    core.info("Found message: channel=" + conversation.channel.id + ", ts=" + conversation.ts)
 
     await client.reactions.add({
       token: botToken,

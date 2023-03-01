@@ -4,6 +4,9 @@ inputs:
   slack-bot-token:
     description: 'API token to post messages to slack'
     required: true
+  slack-search-token:
+    description: 'API token to search messages in slack (must be a user token with search:read scope)'
+    required: false
   channel-id:
     description: 'Channel that manages PR notifications, unnecessary for reactions'
     required: false
