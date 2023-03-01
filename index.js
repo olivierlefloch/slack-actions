@@ -97,7 +97,7 @@ const react = async () => {
       token: botToken,
       channel: conversation.channel.id,
       name: messages,  // The reacji
-      timestamp: message.ts  // The timestamp is the message's unique identifier
+      timestamp: conversation.ts  // The timestamp is the message's unique identifier
     })
   }
 }
