@@ -99,12 +99,20 @@ const react = async () => {
   for (const conversation of conversations.messages.matches) {
     core.info("Found message: channel=" + conversation.channel.id + ", ts=" + conversation.ts)
 
-    await client.reactions.add({
-      token: botToken,
-      channel: conversation.channel.id,
-      name: messages,  // The reacji
-      timestamp: conversation.ts  // The timestamp is the message's unique identifier
-    })
+    try {
+      await client.reactions.add({
+        token: botToken,
+        channel: conversation.channel.id,
+        name: messages,  // The reacji
+        timestamp: conversation.ts  // The timestamp is the message's unique identifier
+      })
+    } catch (error) {
+      if (error.message == "An API error occurred: not_in_channel") {
+        core.info("Found message but not in channel, no action taken.")
+      } else {
+        throw error
+      }
+    }
   }
 }
 
