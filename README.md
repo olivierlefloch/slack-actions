@@ -57,7 +57,7 @@ Arguments
 1. action: post
 2. message: message in the form of javascript
 3. slack-bot-token: Bot token to post as
-3. channel-id: Channel to post to
+4. channel-id: Channel to post to
 ```
 
 ### 2. UPDATE
@@ -70,9 +70,9 @@ Arguments
 ```
 1. action: update
 2. message: message in the form of javascript
-2. string-matcher: javascript template
-3. slack-bot-token: Bot token to post as
-3. channel-id: Channel to post to
+3. string-matcher: javascript template
+4. slack-bot-token: Bot token to post as
+5. channel-id: Channel to post to
 ```
 
 ### 3. REPLY
@@ -85,9 +85,9 @@ Arguments
 ```
 1. action: reply
 2. message: <message in the form of javascript>
-2. string-matcher: <string to match against using `includes`>
-3. slack-bot-token: <Bot token to post as>
-3. channel-id: <Channel to post to>
+3. string-matcher: <string to match against using `includes`>
+4. slack-bot-token: <Bot token to post as>
+5. channel-id: <Channel to post to>
 ```
 
 ### 4. REACT
